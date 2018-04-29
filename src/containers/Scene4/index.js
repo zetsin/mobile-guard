@@ -6,32 +6,38 @@ import { withStyles } from 'material-ui/styles'
 import QueueAnim from 'rc-queue-anim'
 import TweenOne from 'rc-tween-one'
 
-import window from 'images/scene1/window.png'
-import me from 'images/scene1/me.png'
-import shadow from 'images/scene1/shadow.png'
-import desc from 'images/scene1/desc.png'
+import wall from 'images/scene4/wall.png'
+import me from 'images/scene4/me.png'
+import talking from 'images/scene4/talking.png'
+import light from 'images/scene4/light.png'
+import desc from 'images/scene4/desc.png'
 import question from 'images/question.png'
-import answer1 from 'images/scene1/answer1.png'
-import answer2 from 'images/scene1/answer2.png'
-import answer3 from 'images/scene1/answer3.png'
+import answer1 from 'images/scene4/answer1.png'
+import answer2 from 'images/scene4/answer2.png'
+import answer3 from 'images/scene4/answer3.png'
 
 import { App } from 'stores'
 
 const styles = {
-  window: {
+  wall: {
     position: 'absolute',
     width: '100%',
-    top: 0,
+    bottom: 0,
   },
   me: {
     position: 'absolute',
     width: '100%',
     bottom: 0,
   },
-  shadow: {
+  talking: {
     position: 'absolute',
     width: '100%',
-    bottom: 0,
+    top: 0,
+  },
+  light: {
+    position: 'absolute',
+    width: '100%',
+    top: 0,
   },
   modal: {
     position: 'absolute',
@@ -43,7 +49,7 @@ const styles = {
   desc: {
     position: 'absolute',
     width: '100%',
-    top: 0
+    top: 0,
   },
   question: {
     position: 'absolute',
@@ -70,22 +76,25 @@ const styles = {
 class Comp extends React.Component {
   handleClick = score => event => {
     const { dispatch, history } = this.props
-    dispatch(App.answer(0, score))
-    history.push('./scene2')
+    dispatch(App.answer(3, score))
+    history.push('./share')
   }
   render() {
     const { classes } = this.props
 
     return (
       <React.Fragment>
-        <QueueAnim key="window" type="scale" delay={0} duration={2000} component="span">
-          <img key="window" alt="window" src={window} className={classes.window} />
+        <QueueAnim key="wall" type="right" delay={0} duration={1000} component="span">
+          <img key="wall" alt="wall" src={wall} className={classes.wall} />
         </QueueAnim>
-        <QueueAnim key="me" type="scaleBig" delay={0} duration={2000} component="span">
-          <img key="me" alt="me" src={me} className={classes.me} />
+        <QueueAnim key="me" type="left" delay={1000} duration={2000} component="span">
+          <TweenOne key="me" animation={{ x: '-10%', yoyo: true, repeat: -1, type: 'from', duration: 1555 }} component="img" alt="me" src={me} className={classes.me} />
         </QueueAnim>
-        <QueueAnim key="shadow" type="bottom" delay={2000} duration={3000} component="span">
-          <TweenOne key="shadow" animation={{ scale: 1.1, opacity: 0.8, blur: '10px', yoyo: true, repeat: -1, type: 'from', duration: 1555 }} component="img" alt="shadow" src={shadow} className={classes.shadow} />
+        <QueueAnim key="talking" type="top" delay={3000} duration={1000} component="span">
+          <img key="talking" alt="talking" src={talking} className={classes.talking} />
+        </QueueAnim>
+        <QueueAnim key="light" type="scaleBig" delay={7000} duration={1000} component="span">
+          <TweenOne key="light" animation={{ scale: 0.9, yoyo: true, repeat: -1, type: 'from', duration: 855 }} component="img" alt="light" src={light} className={classes.light} />
         </QueueAnim>
         <QueueAnim key="modal" type="alpha" delay={5000} duration={1000} component="span">
           <div key="modal" alt="modal" className={classes.modal} />
