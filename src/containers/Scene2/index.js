@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { withStyles } from 'material-ui/styles'
-import { LinearProgress } from 'material-ui/Progress'
 
 import QueueAnim from 'rc-queue-anim'
 import TweenOne from 'rc-tween-one'
@@ -20,22 +19,9 @@ import answer1 from 'images/scene2/answer1.png'
 import answer2 from 'images/scene2/answer2.png'
 import answer3 from 'images/scene2/answer3.png'
 
-import { App } from 'stores'
+import Preload from 'components/Preload'
 
-const images = [
-  corner,
-  me,
-  hand,
-  light,
-  speechless,
-  black,
-  modal,
-  desc,
-  question,
-  answer1,
-  answer2,
-  answer3
-]
+import { App } from 'stores'
 
 const styles = {
   corner: {
@@ -119,8 +105,8 @@ class Comp extends React.Component {
   render() {
     const { classes } = this.props
 
-    return this.state.loaded === images.length ? (
-      <React.Fragment>
+    return (
+      <Preload images={[ corner, me, hand, light, speechless, black, modal, desc, question, answer1, answer2, answer3 ]}>
         <QueueAnim key="corner" type="scaleBig" delay={0} duration={1000} component="span">
           <img key="corner" alt="corner" src={corner} className={classes.corner} />
         </QueueAnim>
@@ -157,14 +143,7 @@ class Comp extends React.Component {
         <QueueAnim key="answer3" type="bottom" delay={10000} duration={1000} component="span">
           <img key="answer3" alt="answer3" src={answer3} className={classes.answer3} onClick={this.handleClick(3)} />
         </QueueAnim>
-      </React.Fragment>
-    ) : (
-      <React.Fragment>
-        <LinearProgress color="secondary" />
-        <div style={{ display: 'none' }}>
-          {images.map((item, index) => <img key={index} alt="preload" src={item} onLoad={this.handleLoad} />)}
-        </div>
-      </React.Fragment>
+      </Preload>
     )
   }
 }
