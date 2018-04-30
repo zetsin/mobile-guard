@@ -15,7 +15,7 @@ class Comp extends React.Component {
 
     return this.state.loaded < images.length ? (
       <React.Fragment>
-        <LinearProgress color="secondary" />
+        <LinearProgress />
         <div style={{ display: 'none' }}>
           {images.map((item, index) => <img key={index} alt="preload" src={item} onLoad={this.handleLoad} />)}
         </div>
