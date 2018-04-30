@@ -26,7 +26,10 @@ class Comp extends React.Component {
     return (
       <QueueAnim className={classes.root}>
         <div key="head" className={classes.head}>
-          <Typography variant="display2">
+          <Typography variant="title">
+            {app.name}
+          </Typography>
+          <Typography variant="headline">
             {app.scores}
           </Typography>
         </div>

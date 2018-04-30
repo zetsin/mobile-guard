@@ -26,7 +26,7 @@ const styles = {
   robber: {
     position: 'absolute',
     width: '100%',
-    bottom: 0,
+    bottom: '20%',
   },
   phone: {
     position: 'absolute',
@@ -41,42 +41,64 @@ const styles = {
   desc: {
     position: 'absolute',
     width: '100%',
-    bottom: 0,
+    bottom: '20%',
+  },
+  name: {
+    position: 'absolute',
+    width: '45%',
+    left: 0,
+    right: 0,
+    margin: 'auto',
+    bottom: '25%',
+    fontSize: 20,
+    zIndex: 999,
+    background: 'none',
+    border: 'none',
+    '&::placeholder': {
+      color: 'black',
+    }
   },
   go: {
     position: 'absolute',
-    width: '100%',
-    bottom: 0,
+    width: '30%',
+    left: 0,
+    right: 0,
+    margin: 'auto',
+    bottom: '5%',
   },
 }
 
 class Comp extends React.Component {
-  handleChange = event => {}
+  handleChange = event => {
+    const { dispatch } = this.props
+    dispatch(App.sign(event.target.value))
+  }
   handleClick = event => {
     const { history } = this.props
     history.push('./scene1')
   }
   render() {
-    const { classes } = this.props
+    const { classes, app } = this.props
 
     return (
       <Preload images={[ logo, me, robber, phone, desc, go ]}>
         <QueueAnim key="robber" type="left" delay={1000} duration={1000} component="span">
           <img key="robber" alt="robber" src={robber} className={classes.robber} />
         </QueueAnim>
+        <QueueAnim key="desc" type="left" delay={1000} duration={1000} component="span">
+          <img key="desc" alt="desc" src={desc} className={classes.desc} />
+          <input key="name" placeholder="姓名：" value={app.name} className={classes.name} onChange={this.handleChange} />
+        </QueueAnim>
         <QueueAnim key="phone" type="top" delay={2000} duration={1000} component="span">
           <TweenOne key="phone" animation={{ y: "-10%", yoyo: true, repeat: -1, type: 'from', duration: 1555 }} component="img" alt="phone" src={phone} className={classes.phone} />
-        </QueueAnim>
-        <QueueAnim key="desc" type="bottom" delay={3000} duration={2000} component="span">
-          <img key="desc" alt="desc" src={desc} className={classes.desc} />
         </QueueAnim>
         <QueueAnim key="me" type="right" delay={1000} duration={1000} component="span">
           <img key="me" alt="me" src={me} className={classes.me} />
         </QueueAnim>
-        <QueueAnim key="go" type="scale" delay={5000} duration={1000} component="span">
-          <TweenOne key="go" animation={{ scale: 1.2, yoyo: true, repeat: -1, type: 'from', duration: 955 }} component="img" alt="go" src={go} className={classes.go} onClick={this.handleClick} />
+        <QueueAnim key="go" type="bottom" delay={3000} duration={1000} component="span">
+          <TweenOne key="go" animation={{ scale: 1.1, yoyo: true, repeat: -1, type: 'from', duration: 955 }} component="img" alt="go" src={go} className={classes.go} onClick={this.handleClick} />
         </QueueAnim>
-        <QueueAnim key="logo" type="scaleBig" delay={0} duration={1000} component="span">
+        <QueueAnim key="logo" type="scale" delay={0} duration={1000} component="span">
           <TweenOne key="logo" animation={{ scale: 1.1, yoyo: true, repeat: -1, type: 'from', duration: 1000 }} component="img" alt="logo" src={logo} className={classes.logo} />
         </QueueAnim>
       </Preload>
