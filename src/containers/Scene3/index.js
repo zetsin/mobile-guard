@@ -96,31 +96,31 @@ class Comp extends React.Component {
         <QueueAnim key="door" type="top" delay={0} duration={1000} component="span">
           <TweenOne key="door" animation={{ blur: "3px", yoyo: true, repeat: -1, duration: 1555 }} component="img" alt="door" src={door} className={classes.door} />
         </QueueAnim>
-        <QueueAnim key="me" type="scale" delay={3000} duration={2000} component="span">
+        <QueueAnim key="me" type="scale" delay={2000} duration={1000} component="span">
           <TweenOne key="me" animation={{ y: '-10%', yoyo: true, repeat: -1, type: 'from', duration: 955, repeatDelay: 500, ease: TweenOne.easing.path('M0,100 L25,100 C34,20 40,0 100,0') }} component="img" alt="me" src={me} className={classes.me} />
         </QueueAnim>
-        <QueueAnim key="talking" type="bottom" delay={1000} duration={2000} component="span">
+        <QueueAnim key="talking" type="bottom" delay={1000} duration={1000} component="span">
           <TweenOne key="talking" animation={{ scale: 1.1, yoyo: true, repeat: -1, type: 'from', duration: 1255 }} component="img" alt="talking" src={talking} className={classes.talking} />
         </QueueAnim>
         <QueueAnim key="parents" type="bottom" delay={0} duration={1000} component="span">
           <img key="parents" alt="parents" src={parents} className={classes.parents} />
         </QueueAnim>
-        <QueueAnim key="modal" type="alpha" delay={5000} duration={1000} component="span">
+        <QueueAnim key="modal" type="alpha" delay={4000} duration={1000} component="span">
           <img key="modal" alt="modal" src={modal} className={classes.modal} />
         </QueueAnim>
-        <QueueAnim key="desc" type="top" delay={5000} duration={2000} component="span">
+        <QueueAnim key="desc" type="top" delay={4000} duration={2000} component="span">
           <img key="desc" alt="desc" src={desc} className={classes.desc} />
         </QueueAnim>
-        <QueueAnim key="question" type="scaleBig" delay={7000} duration={1000} component="span">
+        <QueueAnim key="question" type="scaleBig" delay={6000} duration={1000} component="span">
           <TweenOne key="question" animation={{ scale: 0.9, yoyo: true, repeat: -1, type: 'from', duration: 1000 }} component="img" alt="question" src={question} className={classes.question} />
         </QueueAnim>
-        <QueueAnim key="answer1" type="bottom" delay={8000} duration={1000} component="span">
+        <QueueAnim key="answer1" type="bottom" delay={7000} duration={1000} component="span">
           <img key="answer1" alt="answer1" src={answer1} className={classes.answer1} onClick={this.handleClick(1)} />
         </QueueAnim>
-        <QueueAnim key="answer2" type="bottom" delay={9000} duration={1000} component="span">
+        <QueueAnim key="answer2" type="bottom" delay={8000} duration={1000} component="span">
           <img key="answer2" alt="answer2" src={answer2} className={classes.answer2} onClick={this.handleClick(2)} />
         </QueueAnim>
-        <QueueAnim key="answer3" type="bottom" delay={10000} duration={1000} component="span">
+        <QueueAnim key="answer3" type="bottom" delay={9000} duration={1000} component="span">
           <img key="answer3" alt="answer3" src={answer3} className={classes.answer3} onClick={this.handleClick(3)} />
         </QueueAnim>
       </Preload>

@@ -119,28 +119,28 @@ class Comp extends React.Component {
         <QueueAnim key="black" type="top" delay={2000} duration={1000} component="span">
           <TweenOne key="black" animation={{ y: '-10%', scale: 1.1, blur: '10px', yoyo: true, repeat: -1, type: 'from', duration: 1255 }} component="img" alt="black" src={black} className={classes.black} />
         </QueueAnim>
-        <QueueAnim key="speechless" type="top" delay={3000} duration={1000} component="span">
+        <QueueAnim key="speechless" type="bottom" delay={2000} duration={1000} component="span">
           <img key="speechless" alt="speechless" src={speechless} className={classes.speechless} />
         </QueueAnim>
-        <QueueAnim key="light" type="right" delay={4000} duration={1000} component="span">
+        <QueueAnim key="light" type="right" delay={3000} duration={1000} component="span">
           <TweenOne key="light" animation={{ blur: '20px', yoyo: true, repeat: -1, type: 'from', duration: 855 }} component="img" alt="light" src={light} className={classes.light} />
         </QueueAnim>
-        <QueueAnim key="modal" type="alpha" delay={5000} duration={1000} component="span">
+        <QueueAnim key="modal" type="alpha" delay={4000} duration={1000} component="span">
           <img key="modal" alt="modal" src={modal} className={classes.modal} />
         </QueueAnim>
-        <QueueAnim key="desc" type="top" delay={5000} duration={2000} component="span">
+        <QueueAnim key="desc" type="top" delay={4000} duration={2000} component="span">
           <img key="desc" alt="desc" src={desc} className={classes.desc} />
         </QueueAnim>
-        <QueueAnim key="question" type="scaleBig" delay={7000} duration={1000} component="span">
+        <QueueAnim key="question" type="scaleBig" delay={6000} duration={1000} component="span">
           <TweenOne key="question" animation={{ scale: 0.9, yoyo: true, repeat: -1, type: 'from', duration: 1000 }} component="img" alt="question" src={question} className={classes.question} />
         </QueueAnim>
-        <QueueAnim key="answer1" type="bottom" delay={8000} duration={1000} component="span">
+        <QueueAnim key="answer1" type="bottom" delay={7000} duration={1000} component="span">
           <img key="answer1" alt="answer1" src={answer1} className={classes.answer1} onClick={this.handleClick(1)} />
         </QueueAnim>
-        <QueueAnim key="answer2" type="bottom" delay={9000} duration={1000} component="span">
+        <QueueAnim key="answer2" type="bottom" delay={8000} duration={1000} component="span">
           <img key="answer2" alt="answer2" src={answer2} className={classes.answer2} onClick={this.handleClick(2)} />
         </QueueAnim>
-        <QueueAnim key="answer3" type="bottom" delay={10000} duration={1000} component="span">
+        <QueueAnim key="answer3" type="bottom" delay={9000} duration={1000} component="span">
           <img key="answer3" alt="answer3" src={answer3} className={classes.answer3} onClick={this.handleClick(3)} />
         </QueueAnim>
       </Preload>
