@@ -15,8 +15,6 @@ import Ticket from 'containers/Ticket'
 
 import background from 'images/background.png'
 
-import Preload from './preload'
-
 const styles = {
   background: {
     position: 'fixed',
@@ -39,7 +37,6 @@ class Comp extends React.Component {
       <React.Fragment>
         <CssBaseline />
         <div alt="background" className={classes.background}>
-          <Preload />
           <Switch key='switch'>
             <Route path="/" component={Home} exact />
             <Route path="/scene1" component={Scene1} exact />

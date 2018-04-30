@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { withStyles } from 'material-ui/styles'
+import { LinearProgress } from 'material-ui/Progress'
 
 import QueueAnim from 'rc-queue-anim'
 import TweenOne from 'rc-tween-one'
@@ -12,6 +13,7 @@ import hand from 'images/scene2/hand.png'
 import light from 'images/scene2/light.png'
 import speechless from 'images/scene2/speechless.png'
 import black from 'images/scene2/black.png'
+import modal from 'images/modal.png'
 import desc from 'images/scene2/desc.png'
 import question from 'images/question.png'
 import answer1 from 'images/scene2/answer1.png'
@@ -19,6 +21,21 @@ import answer2 from 'images/scene2/answer2.png'
 import answer3 from 'images/scene2/answer3.png'
 
 import { App } from 'stores'
+
+const images = [
+  corner,
+  me,
+  hand,
+  light,
+  speechless,
+  black,
+  modal,
+  desc,
+  question,
+  answer1,
+  answer2,
+  answer3
+]
 
 const styles = {
   corner: {
@@ -56,9 +73,7 @@ const styles = {
   modal: {
     position: 'absolute',
     width: '100%',
-    top: 0,
-    bottom: 0,
-    background: '#000000aa'
+    height: '100%'
   },
   desc: {
     position: 'absolute',
@@ -88,6 +103,14 @@ const styles = {
 }
 
 class Comp extends React.Component {
+  state = {
+    loaded: 0
+  }
+  handleLoad = event => {
+    this.setState({
+      loaded: this.state.loaded + 1
+    })
+  }
   handleClick = score => event => {
     const { dispatch, history } = this.props
     dispatch(App.answer(1, score))
@@ -96,44 +119,51 @@ class Comp extends React.Component {
   render() {
     const { classes } = this.props
 
-    return (
+    return this.state.loaded === images.length ? (
       <React.Fragment>
-        <QueueAnim key="corner" type="scaleBig" delay={0} duration={2000} component="span">
+        <QueueAnim key="corner" type="scaleBig" delay={0} duration={1000} component="span">
           <img key="corner" alt="corner" src={corner} className={classes.corner} />
         </QueueAnim>
-        <QueueAnim key="me" type="left" delay={0} duration={2000} component="span">
+        <QueueAnim key="me" type="left" delay={0} duration={1000} component="span">
           <img key="me" alt="me" src={me} className={classes.me} />
         </QueueAnim>
-        <QueueAnim key="hand" type="bottom" delay={2000} duration={2000} component="span">
+        <QueueAnim key="hand" type="bottom" delay={1000} duration={1000} component="span">
           <TweenOne key="hand" animation={{ right: '20%', yoyo: true, repeat: -1, type: 'from', duration: 1555 }} component="img" alt="hand" src={hand} className={classes.hand} />
         </QueueAnim>
-        <QueueAnim key="black" type="top" delay={4000} duration={1000} component="span">
-          <TweenOne key="black" animation={{ y: '-10%', blur: '10px', yoyo: true, repeat: -1, type: 'from', duration: 1255 }} component="img" alt="black" src={black} className={classes.black} />
+        <QueueAnim key="black" type="top" delay={2000} duration={1000} component="span">
+          <TweenOne key="black" animation={{ y: '-10%', scale: 1.1, blur: '10px', yoyo: true, repeat: -1, type: 'from', duration: 1255 }} component="img" alt="black" src={black} className={classes.black} />
         </QueueAnim>
-        <QueueAnim key="speechless" type="top" delay={5000} duration={1000} component="span">
+        <QueueAnim key="speechless" type="top" delay={3000} duration={1000} component="span">
           <img key="speechless" alt="speechless" src={speechless} className={classes.speechless} />
         </QueueAnim>
-        <QueueAnim key="light" type="right" delay={5000} duration={2000} component="span">
+        <QueueAnim key="light" type="right" delay={4000} duration={1000} component="span">
           <TweenOne key="light" animation={{ blur: '20px', yoyo: true, repeat: -1, type: 'from', duration: 855 }} component="img" alt="light" src={light} className={classes.light} />
         </QueueAnim>
-        <QueueAnim key="modal" type="alpha" delay={7000} duration={1000} component="span">
-          <div key="modal" alt="modal" className={classes.modal} />
+        <QueueAnim key="modal" type="alpha" delay={5000} duration={1000} component="span">
+          <img key="modal" alt="modal" src={modal} className={classes.modal} />
         </QueueAnim>
-        <QueueAnim key="desc" type="top" delay={7000} duration={2000} component="span">
+        <QueueAnim key="desc" type="top" delay={5000} duration={2000} component="span">
           <img key="desc" alt="desc" src={desc} className={classes.desc} />
         </QueueAnim>
-        <QueueAnim key="question" type="scaleBig" delay={9000} duration={1000} component="span">
+        <QueueAnim key="question" type="scaleBig" delay={7000} duration={1000} component="span">
           <TweenOne key="question" animation={{ scale: 0.9, yoyo: true, repeat: -1, type: 'from', duration: 1000 }} component="img" alt="question" src={question} className={classes.question} />
         </QueueAnim>
-        <QueueAnim key="answer1" type="bottom" delay={10000} duration={1000} component="span">
+        <QueueAnim key="answer1" type="bottom" delay={8000} duration={1000} component="span">
           <img key="answer1" alt="answer1" src={answer1} className={classes.answer1} onClick={this.handleClick(1)} />
         </QueueAnim>
-        <QueueAnim key="answer2" type="bottom" delay={11000} duration={1000} component="span">
+        <QueueAnim key="answer2" type="bottom" delay={9000} duration={1000} component="span">
           <img key="answer2" alt="answer2" src={answer2} className={classes.answer2} onClick={this.handleClick(2)} />
         </QueueAnim>
-        <QueueAnim key="answer3" type="bottom" delay={12000} duration={1000} component="span">
+        <QueueAnim key="answer3" type="bottom" delay={10000} duration={1000} component="span">
           <img key="answer3" alt="answer3" src={answer3} className={classes.answer3} onClick={this.handleClick(3)} />
         </QueueAnim>
+      </React.Fragment>
+    ) : (
+      <React.Fragment>
+        <LinearProgress color="secondary" />
+        <div style={{ display: 'none' }}>
+          {images.map((item, index) => <img key={index} alt="preload" src={item} onLoad={this.handleLoad} />)}
+        </div>
       </React.Fragment>
     )
   }

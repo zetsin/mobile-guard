@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { withStyles } from 'material-ui/styles'
+import { LinearProgress } from 'material-ui/Progress'
 
 import QueueAnim from 'rc-queue-anim'
 import TweenOne from 'rc-tween-one'
@@ -10,6 +11,7 @@ import wall from 'images/scene4/wall.png'
 import me from 'images/scene4/me.png'
 import talking from 'images/scene4/talking.png'
 import light from 'images/scene4/light.png'
+import modal from 'images/modal.png'
 import desc from 'images/scene4/desc.png'
 import question from 'images/question.png'
 import answer1 from 'images/scene4/answer1.png'
@@ -17,6 +19,19 @@ import answer2 from 'images/scene4/answer2.png'
 import answer3 from 'images/scene4/answer3.png'
 
 import { App } from 'stores'
+
+const images = [
+  wall,
+  me,
+  talking,
+  light,
+  modal,
+  desc,
+  question,
+  answer1,
+  answer2,
+  answer3
+]
 
 const styles = {
   wall: {
@@ -42,9 +57,7 @@ const styles = {
   modal: {
     position: 'absolute',
     width: '100%',
-    top: 0,
-    bottom: 0,
-    background: '#000000aa'
+    height: '100%'
   },
   desc: {
     position: 'absolute',
@@ -74,6 +87,14 @@ const styles = {
 }
 
 class Comp extends React.Component {
+  state = {
+    loaded: 0
+  }
+  handleLoad = event => {
+    this.setState({
+      loaded: this.state.loaded + 1
+    })
+  }
   handleClick = score => event => {
     const { dispatch, history } = this.props
     dispatch(App.answer(3, score))
@@ -82,7 +103,7 @@ class Comp extends React.Component {
   render() {
     const { classes } = this.props
 
-    return (
+    return this.state.loaded === images.length ? (
       <React.Fragment>
         <QueueAnim key="wall" type="right" delay={0} duration={1000} component="span">
           <img key="wall" alt="wall" src={wall} className={classes.wall} />
@@ -97,7 +118,7 @@ class Comp extends React.Component {
           <TweenOne key="light" animation={{ scale: 0.9, yoyo: true, repeat: -1, type: 'from', duration: 855 }} component="img" alt="light" src={light} className={classes.light} />
         </QueueAnim>
         <QueueAnim key="modal" type="alpha" delay={5000} duration={1000} component="span">
-          <div key="modal" alt="modal" className={classes.modal} />
+          <img key="modal" alt="modal" src={modal} className={classes.modal} />
         </QueueAnim>
         <QueueAnim key="desc" type="top" delay={5000} duration={2000} component="span">
           <img key="desc" alt="desc" src={desc} className={classes.desc} />
@@ -114,6 +135,13 @@ class Comp extends React.Component {
         <QueueAnim key="answer3" type="bottom" delay={10000} duration={1000} component="span">
           <img key="answer3" alt="answer3" src={answer3} className={classes.answer3} onClick={this.handleClick(3)} />
         </QueueAnim>
+      </React.Fragment>
+    ) : (
+      <React.Fragment>
+        <LinearProgress color="secondary" />
+        <div style={{ display: 'none' }}>
+          {images.map((item, index) => <img key={index} alt="preload" src={item} onLoad={this.handleLoad} />)}
+        </div>
       </React.Fragment>
     )
   }
