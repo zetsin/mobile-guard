@@ -19,7 +19,6 @@ const styles = {
   root: {
     position: 'fixed',
     maxWidth: 414,
-    maxHeight: 736,
     top: 0,
     right: 0,
     left: 0,
