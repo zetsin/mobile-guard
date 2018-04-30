@@ -58,10 +58,10 @@ class Comp extends React.Component {
     const { height } = this.state
     return (
       <MuiThemeProvider theme={theme}>
+        <CssBaseline />
         <div className={classes.root} ref={el => this.root = el} style={{
           height
         }}>
-          <CssBaseline />
           <Switch key='switch'>
             <Route path="/" component={Home} exact />
             <Route path="/scene1" component={Scene1} exact />
