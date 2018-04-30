@@ -35,8 +35,11 @@ class Comp extends React.Component {
     let height = window.innerHeight
     const radio = width / height
 
-    if(radio > 0.65 || radio < 0.35) {
-      height = width * 2
+    if(radio < 0.35) {
+      height = width / 0.4
+    }
+    else if(radio > 0.65) {
+      height = width / 0.6
     }
     this.setState({
       height

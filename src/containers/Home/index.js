@@ -54,7 +54,7 @@ const styles = {
     fontSize: '18pt',
   },
   name: {
-    width: 100,
+    width: 150,
     background: 'none',
     border: 'none',
     fontSize: '18pt',
@@ -91,15 +91,15 @@ class Comp extends React.Component {
         <QueueAnim key="robber" type="left" delay={1000} duration={1000} component="span">
           <img key="robber" alt="robber" src={robber} className={classes.robber} />
         </QueueAnim>
-        <QueueAnim key="desc" type="left" delay={1000} duration={1000} component="span">
+        <QueueAnim key="desc" type="scale" delay={2000} duration={1000} component="span">
           <img key="desc" alt="desc" src={desc} className={classes.desc} />
-        </QueueAnim>
-        <QueueAnim key="phone" type="scale" delay={2000} duration={1000} component="span">
-          <TweenOne key="phone" animation={{ y: "-10%", yoyo: true, repeat: -1, type: 'from', duration: 1555 }} component="img" alt="phone" src={phone} className={classes.phone} />
           <div key="input" className={classes.input}>
-            <label>姓名：</label>
+            <label>姓名:</label>
             <input value={app.name} className={classes.name} onChange={this.handleChange} ref={el => this.input = el} />
           </div>
+        </QueueAnim>
+        <QueueAnim key="phone" type="top" delay={2000} duration={1000} component="span">
+          <TweenOne key="phone" animation={{ y: "-10%", yoyo: true, repeat: -1, type: 'from', duration: 1555 }} component="img" alt="phone" src={phone} className={classes.phone} />
         </QueueAnim>
         <QueueAnim key="me" type="right" delay={1000} duration={1000} component="span">
           <img key="me" alt="me" src={me} className={classes.me} />

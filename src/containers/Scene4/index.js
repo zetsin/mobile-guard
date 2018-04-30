@@ -102,7 +102,7 @@ class Comp extends React.Component {
         <QueueAnim key="talking" type="top" delay={3000} duration={1000} component="span">
           <img key="talking" alt="talking" src={talking} className={classes.talking} />
         </QueueAnim>
-        <QueueAnim key="light" type="scaleBig" delay={7000} duration={1000} component="span">
+        <QueueAnim key="light" type="scaleBig" delay={4000} duration={1000} component="span">
           <TweenOne key="light" animation={{ scale: 1.2, yoyo: true, repeat: -1, type: 'from', duration: 855 }} component="img" alt="light" src={light} className={classes.light} />
         </QueueAnim>
         <QueueAnim key="modal" type="alpha" delay={5000} duration={1000} component="span">
