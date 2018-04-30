@@ -43,17 +43,21 @@ const styles = {
     width: '100%',
     bottom: 130,
   },
-  name: {
+  input: {
     position: 'absolute',
-    width: '20%',
+    width: '60%',
     left: 0,
     right: 0,
     margin: 'auto',
     bottom: 160,
-    fontSize: 25,
-    zIndex: 999,
+    zIndex: 99,
+    fontSize: '18pt',
+  },
+  name: {
+    width: 100,
     background: 'none',
     border: 'none',
+    fontSize: '18pt',
   },
   go: {
     position: 'absolute',
@@ -90,8 +94,12 @@ class Comp extends React.Component {
         <QueueAnim key="desc" type="left" delay={1000} duration={1000} component="span">
           <img key="desc" alt="desc" src={desc} className={classes.desc} />
         </QueueAnim>
-        <QueueAnim key="phone" type="top" delay={2000} duration={1000} component="span">
+        <QueueAnim key="phone" type="scale" delay={2000} duration={1000} component="span">
           <TweenOne key="phone" animation={{ y: "-10%", yoyo: true, repeat: -1, type: 'from', duration: 1555 }} component="img" alt="phone" src={phone} className={classes.phone} />
+          <div key="input" className={classes.input}>
+            <label>姓名：</label>
+            <input value={app.name} className={classes.name} onChange={this.handleChange} ref={el => this.input = el} />
+          </div>
         </QueueAnim>
         <QueueAnim key="me" type="right" delay={1000} duration={1000} component="span">
           <img key="me" alt="me" src={me} className={classes.me} />
@@ -99,10 +107,9 @@ class Comp extends React.Component {
         <QueueAnim key="go" type="bottom" delay={3000} duration={1000} component="span">
           <TweenOne key="go" animation={{ scale: 1.1, yoyo: true, repeat: -1, type: 'from', duration: 955 }} component="img" alt="go" src={go} className={classes.go} onClick={this.handleClick} />
         </QueueAnim>
-        <QueueAnim key="logo" type="scale" delay={0} duration={1000} component="span">
+        <QueueAnim key="logo" type="scaleBig" delay={0} duration={1000} component="span">
           <TweenOne key="logo" animation={{ scale: 1.1, yoyo: true, repeat: -1, type: 'from', duration: 1000 }} component="img" alt="logo" src={logo} className={classes.logo} />
         </QueueAnim>
-          <input type="text" key="name" value={app.name} className={classes.name} onChange={this.handleChange} ref={el => this.input = el} />
       </Preload>
     )
   }

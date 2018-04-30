@@ -17,12 +17,8 @@ import background from 'images/background.png'
 
 const styles = {
   root: {
-    position: 'fixed',
+    position: 'relative',
     maxWidth: 414,
-    top: 0,
-    right: 0,
-    left: 0,
-    bottom: 0,
     overflow: 'hidden',
     margin: 'auto',
     backgroundImage: `url(${background})`,
@@ -31,24 +27,44 @@ const styles = {
 }
 
 class Comp extends React.Component {
+  state = {
+    height: window.innerHeight
+  }
+  updateDimensions = () => {
+    const width = this.root.offsetWidth
+    let height = window.innerHeight
+    const radio = width / height
+
+    if(radio > 0.65 || radio < 0.35) {
+      height = width * 2
+    }
+    this.setState({
+      height
+    })
+  }
   render() {
     const { classes } = this.props
+    const { height } = this.state
     return (
-      <React.Fragment>
+      <div className={classes.root} ref={el => this.root = el} style={{
+        height
+      }}>
         <CssBaseline />
-        <div className={classes.root}>
-          <Switch key='switch'>
-            <Route path="/" component={Home} exact />
-            <Route path="/scene1" component={Scene1} exact />
-            <Route path="/scene2" component={Scene2} exact />
-            <Route path="/scene3" component={Scene3} exact />
-            <Route path="/scene4" component={Scene4} exact />
-            <Route path="/share" component={Share} exact />
-            <Route path="/ticket" component={Ticket} exact />
-          </Switch>
-        </div>
-      </React.Fragment>
+        <Switch key='switch'>
+          <Route path="/" component={Home} exact />
+          <Route path="/scene1" component={Scene1} exact />
+          <Route path="/scene2" component={Scene2} exact />
+          <Route path="/scene3" component={Scene3} exact />
+          <Route path="/scene4" component={Scene4} exact />
+          <Route path="/share" component={Share} exact />
+          <Route path="/ticket" component={Ticket} exact />
+        </Switch>
+      </div>
     )
+  }
+  componentDidMount() {
+    this.updateDimensions();
+    window.addEventListener("resize", this.updateDimensions);
   }
 }
 
