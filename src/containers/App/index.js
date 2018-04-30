@@ -16,9 +16,10 @@ import Ticket from 'containers/Ticket'
 import background from 'images/background.png'
 
 const styles = {
-  background: {
+  root: {
     position: 'fixed',
-    maxWidth: 500,
+    maxWidth: 414,
+    maxHeight: 736,
     top: 0,
     right: 0,
     left: 0,
@@ -36,7 +37,7 @@ class Comp extends React.Component {
     return (
       <React.Fragment>
         <CssBaseline />
-        <div alt="background" className={classes.background}>
+        <div className={classes.root}>
           <Switch key='switch'>
             <Route path="/" component={Home} exact />
             <Route path="/scene1" component={Scene1} exact />
