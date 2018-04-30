@@ -45,18 +45,15 @@ const styles = {
   },
   name: {
     position: 'absolute',
-    width: '45%',
+    width: '20%',
     left: 0,
     right: 0,
     margin: 'auto',
     bottom: '25%',
-    fontSize: 20,
+    fontSize: 25,
     zIndex: 999,
     background: 'none',
     border: 'none',
-    '&::placeholder': {
-      color: 'black',
-    }
   },
   go: {
     position: 'absolute',
@@ -74,8 +71,13 @@ class Comp extends React.Component {
     dispatch(App.sign(event.target.value))
   }
   handleClick = event => {
-    const { history } = this.props
-    history.push('./scene1')
+    const { history, app } = this.props
+    if(app.name) {
+      history.push('./scene1')
+    }
+    else {
+      this.input.focus()
+    }
   }
   render() {
     const { classes, app } = this.props
@@ -87,7 +89,6 @@ class Comp extends React.Component {
         </QueueAnim>
         <QueueAnim key="desc" type="left" delay={1000} duration={1000} component="span">
           <img key="desc" alt="desc" src={desc} className={classes.desc} />
-          <input key="name" placeholder="姓名：" value={app.name} className={classes.name} onChange={this.handleChange} />
         </QueueAnim>
         <QueueAnim key="phone" type="top" delay={2000} duration={1000} component="span">
           <TweenOne key="phone" animation={{ y: "-10%", yoyo: true, repeat: -1, type: 'from', duration: 1555 }} component="img" alt="phone" src={phone} className={classes.phone} />
@@ -101,6 +102,7 @@ class Comp extends React.Component {
         <QueueAnim key="logo" type="scale" delay={0} duration={1000} component="span">
           <TweenOne key="logo" animation={{ scale: 1.1, yoyo: true, repeat: -1, type: 'from', duration: 1000 }} component="img" alt="logo" src={logo} className={classes.logo} />
         </QueueAnim>
+          <input type="text" key="name" value={app.name} className={classes.name} onChange={this.handleChange} ref={el => this.input = el} />
       </Preload>
     )
   }
