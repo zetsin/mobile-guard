@@ -26,7 +26,7 @@ const styles = {
   robber: {
     position: 'absolute',
     width: '100%',
-    bottom: '20%',
+    bottom: 130,
   },
   phone: {
     position: 'absolute',
@@ -41,7 +41,7 @@ const styles = {
   desc: {
     position: 'absolute',
     width: '100%',
-    bottom: '20%',
+    bottom: 130,
   },
   name: {
     position: 'absolute',
@@ -49,7 +49,7 @@ const styles = {
     left: 0,
     right: 0,
     margin: 'auto',
-    bottom: '25%',
+    bottom: 160,
     fontSize: 25,
     zIndex: 999,
     background: 'none',
@@ -61,7 +61,7 @@ const styles = {
     left: 0,
     right: 0,
     margin: 'auto',
-    bottom: '5%',
+    bottom: 20,
   },
 }
 
