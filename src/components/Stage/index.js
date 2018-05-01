@@ -1,16 +1,5 @@
 import React from 'react'
 
-import { withStyles } from 'material-ui/styles'
-
-const styles = {
-  root: {
-    position: 'relative',
-    maxWidth: 414,
-    margin: 'auto',
-    overflow: 'hidden',
-  }
-}
-
 class Comp extends React.Component {
   state = {
     height: window.innerHeight
@@ -31,10 +20,14 @@ class Comp extends React.Component {
     })
   }
   render() {
-    const { classes, children, style={} } = this.props
+    const { children, style={} } = this.props
     return (
-      <div className={classes.root} ref={el => this.root = el} style={{
+      <div ref={el => this.root = el} style={{
+        position: 'relative',
         height: this.state.height,
+        maxWidth: 414,
+        margin: 'auto',
+        overflow: 'hidden',
         ...style
       }}>
         {children}
@@ -50,4 +43,4 @@ class Comp extends React.Component {
   }
 }
 
-export default withStyles(styles)(Comp)
+export default Comp
