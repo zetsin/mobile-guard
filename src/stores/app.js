@@ -1,18 +1,17 @@
 export default {
   state: {
     name: '',
-    scores: []
+    scores: [],
+    story: ''
   },
 
   actions: {
-    sign: function(name) {
+    update: function(data={}) {
       const { dispatch } = this
 
       dispatch({
         type: 'app/save',
-        payload: {
-          name
-        }
+        payload: data
       })
     },
     answer: function(index, score) {
@@ -24,6 +23,18 @@ export default {
       dispatch({
         type: 'app/save',
         payload: app
+      })
+    },
+    share: function() {
+      const { getState } = this
+      const { app } = getState()
+
+      return fetch('http://couchdb.miaodeli.com/mobile-guard', {
+        method: 'post',
+　　　　　headers: {
+  　　　　 'Content-Type': 'application/json',
+　　　　 },
+        body: JSON.stringify(app)
       })
     }
   },

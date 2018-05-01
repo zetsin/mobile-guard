@@ -11,7 +11,9 @@ class Comp extends React.Component {
     })
   }
   render() {
-    const { children, images=[] } = this.props
+    const { children, component, images=[] } = this.props
+
+    const Component = component || React.Fragment
 
     return this.state.loaded < images.length ? (
       <React.Fragment>
@@ -21,9 +23,9 @@ class Comp extends React.Component {
         </div>
       </React.Fragment>
     ): (
-      <React.Fragment>
+      <Component {...(component ? this.props : {})}>
         { children }
-      </React.Fragment>
+      </Component>
     )
   }
 }

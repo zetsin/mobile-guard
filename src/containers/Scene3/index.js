@@ -18,6 +18,7 @@ import answer2 from 'images/scene3/answer2.png'
 import answer3 from 'images/scene3/answer3.png'
 
 import Preload from 'components/Preload'
+import Stage from 'components/Stage'
 
 import { App } from 'stores'
 
@@ -92,7 +93,7 @@ class Comp extends React.Component {
     const { classes } = this.props
 
     return (
-      <Preload images={[ parents, talking, door, me, modal, desc, question, answer1, answer2, answer3 ]}>
+      <Preload images={[ parents, talking, door, me, modal, desc, question, answer1, answer2, answer3 ]} component={Stage}>
         <QueueAnim key="door" type="top" delay={0} duration={1000} component="span">
           <TweenOne key="door" animation={{ blur: "3px", yoyo: true, repeat: -1, duration: 1555 }} component="img" alt="door" src={door} className={classes.door} />
         </QueueAnim>

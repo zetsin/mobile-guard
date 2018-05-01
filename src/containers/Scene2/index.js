@@ -20,6 +20,7 @@ import answer2 from 'images/scene2/answer2.png'
 import answer3 from 'images/scene2/answer3.png'
 
 import Preload from 'components/Preload'
+import Stage from 'components/Stage'
 
 import { App } from 'stores'
 
@@ -106,7 +107,7 @@ class Comp extends React.Component {
     const { classes } = this.props
 
     return (
-      <Preload images={[ corner, me, hand, light, speechless, black, modal, desc, question, answer1, answer2, answer3 ]}>
+      <Preload images={[ corner, me, hand, light, speechless, black, modal, desc, question, answer1, answer2, answer3 ]} component={Stage}>
         <QueueAnim key="corner" type="scaleBig" delay={0} duration={1000} component="span">
           <img key="corner" alt="corner" src={corner} className={classes.corner} />
         </QueueAnim>

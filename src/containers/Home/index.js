@@ -14,6 +14,7 @@ import desc from 'images/home/desc.png'
 import go from 'images/home/go.png'
 
 import Preload from 'components/Preload'
+import Stage from 'components/Stage'
 
 import { App } from 'stores'
 
@@ -26,42 +27,41 @@ const styles = {
   robber: {
     position: 'absolute',
     width: '100%',
-    bottom: 130,
+    top: 0,
   },
   phone: {
     position: 'absolute',
     width: '100%',
-    bottom: 0
+    top: 0
   },
   me: {
     position: 'absolute',
     width: '100%',
     bottom: 0,
+    pointerEvents: 'none',
   },
   desc: {
     position: 'absolute',
-    width: '100%',
-    bottom: 130,
-  },
-  input: {
-    position: 'absolute',
-    width: '60%',
+    width: 350,
     left: 0,
     right: 0,
     margin: 'auto',
-    bottom: 160,
-    zIndex: 99,
-    fontSize: '18pt',
+    background: `url(${desc})`,
+    backgroundSize: '100% 100%',
+    padding: '170px 80px 25px',
+    bottom: 100,
   },
-  name: {
-    width: 150,
+  input: {
+    width: '100%',
+    fontSize: 22,
     background: 'none',
     border: 'none',
-    fontSize: '18pt',
+    zIndex: 99,
+    textAlign: 'center',
   },
   go: {
     position: 'absolute',
-    width: '30%',
+    width: '20%',
     left: 0,
     right: 0,
     margin: 'auto',
@@ -72,7 +72,9 @@ const styles = {
 class Comp extends React.Component {
   handleChange = event => {
     const { dispatch } = this.props
-    dispatch(App.sign(event.target.value))
+    dispatch(App.update({
+      name: event.target.value
+    }))
   }
   handleClick = event => {
     const { history, app } = this.props
@@ -87,15 +89,13 @@ class Comp extends React.Component {
     const { classes, app } = this.props
 
     return (
-      <Preload images={[ logo, me, robber, phone, desc, go ]}>
+      <Preload images={[ logo, me, robber, phone, desc, go ]} component={Stage}>
         <QueueAnim key="robber" type="left" delay={1000} duration={1000} component="span">
           <img key="robber" alt="robber" src={robber} className={classes.robber} />
         </QueueAnim>
         <QueueAnim key="desc" type="scale" delay={2000} duration={1000} component="span">
-          <img key="desc" alt="desc" src={desc} className={classes.desc} />
-          <div key="input" className={classes.input}>
-            <label>姓名:</label>
-            <input value={app.name} className={classes.name} onChange={this.handleChange} ref={el => this.input = el} />
+          <div key="desc" className={classes.desc}>
+            <input rows="5" placeholder="姓名" value={app.name} className={classes.input} onChange={this.handleChange} ref={el => this.input = el} />
           </div>
         </QueueAnim>
         <QueueAnim key="phone" type="top" delay={2000} duration={1000} component="span">

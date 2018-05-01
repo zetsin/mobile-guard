@@ -5,38 +5,38 @@ import { withStyles } from 'material-ui/styles'
 import Grid from 'material-ui/Grid'
 
 import TweenOne from 'rc-tween-one'
+
 import Preload from 'components/Preload'
+import Stage from 'components/Stage'
 
 import result1 from 'images/share/result1.png'
 import result2 from 'images/share/result2.png'
 import result3 from 'images/share/result3.png'
 import result4 from 'images/share/result4.png'
-import desc from 'images/share/desc.png'
+import photo1 from 'images/share/photo1.png'
+import photo2 from 'images/share/photo2.png'
+import photo3 from 'images/share/photo3.png'
+import photo4 from 'images/share/photo4.png'
 import story from 'images/share/story.png'
 import button from 'images/share/button.png'
 import left from 'images/share/left.png'
 import right from 'images/share/right.png'
 
+import { App } from 'stores'
+
 const styles = {
-  root: {
-    position: 'absolute',
-    width: '100%',
-    height: '100%',
-    padding: '5% 0',
-    overflowX: 'hidden',
-    overflowY: 'scroll'
-  },
   hidden: {
     display: 'none'
   },
   result: {
     width: '100%'
   },
-  canvas: {
-    display: 'none'
-  },
-  desc: {
-    width: '100%'
+  photo: {
+    position: 'absolute',
+    width: '100%',
+    left: 0,
+    right: 0,
+    opacity: 0
   },
   story: {
     width: '100%',
@@ -62,22 +62,39 @@ const styles = {
 }
 
 class Comp extends React.Component {
-  handleLoad = () => {
+  handleLoad = ref => event => {
     const { app } = this.props
 
-    this.canvas.width = this.img.width
-    this.canvas.height = this.img.height
+    let text = app.name
+
+    this.canvas.width = event.target.width
+    this.canvas.height = event.target.height
 
     const context = this.canvas.getContext("2d")
-    context.drawImage(this.img, 0, 0)
+    context.drawImage(event.target, 0, 0)
+
+    context.font = '24px Arial'
+    context.fillStyle = 'black'
+    while(context.measureText(text).width > 120) {
+      text = text.slice(0, text.length - 1)
+    }
+    context.fillText(text, 170 - context.measureText(text).width / 2, 1015)
+
     context.font = '50px Arial'
     context.fillStyle = 'black'
-    context.fillText(app.name, (this.canvas.width - context.measureText(app.name).width) / 2, 520)
+    context.fillText(text, (this.canvas.width - context.measureText(text).width) / 2, 600)
 
-    this.image.src = this.canvas.toDataURL("image/png")
+    this[ref].src = this.canvas.toDataURL("image/png")
+  }
+  handleChange = event => {
+    const { dispatch } = this.props
+    dispatch(App.update({
+      story: event.target.value
+    }))
   }
   handleClick = event => {
     const { dispatch, history } = this.props
+    dispatch(App.share())
     history.push('./ticket')
   }
   render() {
@@ -85,62 +102,55 @@ class Comp extends React.Component {
 
     const score = app.scores.reduce((a, b) => a + b, 0)
     let result = result4
+    let photo = photo4
     if(score >= 11 && score <= 12) {
       result = result1
+      photo = photo1
     }
     else if(score >= 9 && score <= 10) {
       result = result2
+      photo = photo2
     }
     else if(score >= 7 && score <= 8) {
       result = result3
+      photo = photo3
     }
 
     return (
-      <Preload images={[desc, story, left, button, right]}>
-        <div className={classes.root}>
-          <Grid container>
-            <Grid item xs={12}>
-              <img alt="result" src={result} className={classes.hidden} ref={el => this.img = el} onLoad={this.handleLoad} />
-              <canvas className={classes.canvas} ref={el => this.canvas = el} />
-              <img alt="result" src={result} className={classes.result} ref={el => this.image = el} />
-            </Grid>
-            <Grid item xs={12}>
-              <img alt="desc" src={desc} className={classes.desc} />
-            </Grid>
-            <Grid item xs={12}>
-              <div className={classes.story}>
-                <textarea rows="5" placeholder="还有更多与父母不得不说、一言难尽的故事？欢迎吐槽" className={classes.textarea} />
-              </div>
-            </Grid>
-            <Grid item xs={12}>
-              <Grid container>
-                <Grid item xs={3}>
-                  <TweenOne animation={{ x: '-10%', yoyo: true, repeat: -1, type: 'from', duration: 1000 }} component="img" alt="left" src={left} className={classes.left} />
-                </Grid>
-                <Grid item xs={6}>
-                  <TweenOne animation={{ scale: 0.9, yoyo: true, repeat: -1, type: 'from', duration: 1000 }} component="img" alt="button" src={button} className={classes.button} onClick={this.handleClick} />
-                </Grid>
-                <Grid item xs={3}>
-                  <TweenOne animation={{ x: '10%', yoyo: true, repeat: -1, type: 'from', duration: 1000 }} component="img" alt="right" src={right} className={classes.right} />
-                </Grid>
+      <Preload images={[story, left, button, right, result, photo]} component={Stage} style={{ height: 'initial' }}>
+        <Grid container>
+          <Grid item xs={12}>
+            <div style={{
+              position: 'relative'
+            }}>
+              <canvas className={classes.hidden} ref={el => this.canvas = el} />
+              <img alt="img" src={result} className={classes.hidden} onLoad={this.handleLoad('result')} />
+              <img alt="img" src={result} className={classes.result} ref={el => this.result = el} />
+              <img alt="img" src={photo} className={classes.hidden} onLoad={this.handleLoad('photo')} />
+              <img alt="img" src={photo} className={classes.photo} ref={el => this.photo = el} />
+            </div>
+          </Grid>
+          <Grid item xs={12}>
+            <div className={classes.story}>
+              <textarea rows="5" placeholder="还有更多与父母不得不说、一言难尽的故事？欢迎吐槽" value={app.story} className={classes.textarea} onChange={this.handleChange} />
+            </div>
+          </Grid>
+          <Grid item xs={12}>
+            <Grid container>
+              <Grid item xs={3}>
+                <TweenOne animation={{ x: '-10%', yoyo: true, repeat: -1, type: 'from', duration: 1000 }} component="img" alt="left" src={left} className={classes.left} />
+              </Grid>
+              <Grid item xs={6}>
+                <TweenOne animation={{ scale: 0.9, yoyo: true, repeat: -1, type: 'from', duration: 1000 }} component="img" alt="button" src={button} className={classes.button} onClick={this.handleClick} />
+              </Grid>
+              <Grid item xs={3}>
+                <TweenOne animation={{ x: '10%', yoyo: true, repeat: -1, type: 'from', duration: 1000 }} component="img" alt="right" src={right} className={classes.right} />
               </Grid>
             </Grid>
           </Grid>
-        </div>
+        </Grid>
       </Preload>
     )
-  }
-  componentDidMount = () => {
-    console.log(this)
-    console.log(this.canvas)
-    console.log(this.img)
-    // this.canvas.width = this.img.width
-    // this.canvas.height = this.img.height
-    // this.canvas.getContext("2d").drawImage(this.img, 0, 0)
-    // const image = new Image();  
-    // image.src = this.canvas.toDataURL("image/png")
-    // console.log(image)
-    // console.log(image.src)
   }
 }
 
