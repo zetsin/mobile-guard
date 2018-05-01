@@ -34,7 +34,10 @@ export default {
 　　　　　headers: {
   　　　　 'Content-Type': 'application/json',
 　　　　 },
-        body: JSON.stringify(app)
+        body: JSON.stringify({
+          ...app,
+          userAgent: window.navigator.userAgent
+        })
       })
     }
   },
