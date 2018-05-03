@@ -9,18 +9,18 @@ import TweenOne from 'rc-tween-one'
 import Preload from 'components/Preload'
 import Stage from 'components/Stage'
 
-import result1 from 'images/share/result1.png'
-import result2 from 'images/share/result2.png'
-import result3 from 'images/share/result3.png'
-import result4 from 'images/share/result4.png'
-import photo1 from 'images/share/photo1.png'
-import photo2 from 'images/share/photo2.png'
-import photo3 from 'images/share/photo3.png'
-import photo4 from 'images/share/photo4.png'
-import story from 'images/share/story.png'
-import button from 'images/share/button.png'
-import left from 'images/share/left.png'
-import right from 'images/share/right.png'
+import result1 from 'assets/share/result1.png'
+import result2 from 'assets/share/result2.png'
+import result3 from 'assets/share/result3.png'
+import result4 from 'assets/share/result4.png'
+import photo1 from 'assets/share/photo1.png'
+import photo2 from 'assets/share/photo2.png'
+import photo3 from 'assets/share/photo3.png'
+import photo4 from 'assets/share/photo4.png'
+import story from 'assets/share/story.png'
+import button from 'assets/share/button.png'
+import left from 'assets/share/left.png'
+import right from 'assets/share/right.png'
 
 import { App } from 'stores'
 
@@ -62,10 +62,10 @@ const styles = {
 }
 
 class Comp extends React.Component {
-  handleLoad = ref => event => {
+  handleLoad = (ref, score) => event => {
     const { app } = this.props
 
-    let text = app.name
+    let text = app.name || "姓名"
 
     this.canvas.width = event.target.width
     this.canvas.height = event.target.height
@@ -82,7 +82,7 @@ class Comp extends React.Component {
 
     context.font = '50px Arial'
     context.fillStyle = 'black'
-    context.fillText(text, (this.canvas.width - context.measureText(text).width) / 2, 600)
+    context.fillText(text, (this.canvas.width - context.measureText(text).width) / 2, (score >= 11 && score <= 12) ? 550 : 600)
 
     this[ref].src = this.canvas.toDataURL("image/png")
   }
@@ -124,9 +124,9 @@ class Comp extends React.Component {
               position: 'relative'
             }}>
               <canvas className={classes.hidden} ref={el => this.canvas = el} />
-              <img alt="img" src={result} className={classes.hidden} onLoad={this.handleLoad('result')} />
+              <img alt="img" src={result} className={classes.hidden} onLoad={this.handleLoad('result', score)} />
               <img alt="img" src={result} className={classes.result} ref={el => this.result = el} />
-              <img alt="img" src={photo} className={classes.hidden} onLoad={this.handleLoad('photo')} />
+              <img alt="img" src={photo} className={classes.hidden} onLoad={this.handleLoad('photo', score)} />
               <img alt="img" src={photo} className={classes.photo} ref={el => this.photo = el} />
             </div>
           </Grid>

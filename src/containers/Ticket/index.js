@@ -5,7 +5,7 @@ import { withStyles } from 'material-ui/styles'
 
 import Preload from 'components/Preload'
 
-import ticket from 'images/ticket/main.png'
+import ticket from 'assets/ticket/main.png'
 import Stage from 'components/Stage'
 
 const styles = {

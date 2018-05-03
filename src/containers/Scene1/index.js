@@ -6,15 +6,15 @@ import { withStyles } from 'material-ui/styles'
 import QueueAnim from 'rc-queue-anim'
 import TweenOne from 'rc-tween-one'
 
-import win from 'images/scene1/win.png'
-import me from 'images/scene1/me.png'
-import shadow from 'images/scene1/shadow.png'
-import modal from 'images/modal.png'
-import desc from 'images/scene1/desc.png'
-import question from 'images/question.png'
-import answer1 from 'images/scene1/answer1.png'
-import answer2 from 'images/scene1/answer2.png'
-import answer3 from 'images/scene1/answer3.png'
+import win from 'assets/scene1/win.png'
+import me from 'assets/scene1/me.png'
+import shadow from 'assets/scene1/shadow.png'
+import modal from 'assets/modal.png'
+import desc from 'assets/scene1/desc.png'
+import question from 'assets/question.png'
+import answer1 from 'assets/scene1/answer1.png'
+import answer2 from 'assets/scene1/answer2.png'
+import answer3 from 'assets/scene1/answer3.png'
 
 import Preload from 'components/Preload'
 import Stage from 'components/Stage'
@@ -60,7 +60,7 @@ const styles = {
   answer2: {
     position: 'absolute',
     width: '100%',
-    bottom: '18%',
+    bottom: '20%',
   },
   answer3: {
     position: 'absolute',

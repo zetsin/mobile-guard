@@ -14,6 +14,8 @@ import Scene4 from 'containers/Scene4'
 import Share from 'containers/Share'
 import Ticket from 'containers/Ticket'
 
+import background from 'assets/background.mp3'
+
 const theme = createMuiTheme({
   palette: {
     primary: green
@@ -25,6 +27,7 @@ class Comp extends React.Component {
     return (
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
+        <audio src={background} autoPlay="autoplay" loop="loop" />
         <Switch key='switch'>
           <Route path="/" component={Home} exact />
           <Route path="/scene1" component={Scene1} exact />
@@ -33,6 +36,7 @@ class Comp extends React.Component {
           <Route path="/scene4" component={Scene4} exact />
           <Route path="/share" component={Share} exact />
           <Route path="/ticket" component={Ticket} exact />
+          <Route component={Home} />
         </Switch>
       </MuiThemeProvider>
     )

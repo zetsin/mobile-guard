@@ -1,6 +1,6 @@
 body {
   font-family: sans-serif;
-  background-image: url(images/background.png);
+  background-image: url(assets/background.png);
   background-size: contain;
   background-attachment: fixed;
 }

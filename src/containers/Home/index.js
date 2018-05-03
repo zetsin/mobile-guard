@@ -6,12 +6,12 @@ import { withStyles } from 'material-ui/styles'
 import QueueAnim from 'rc-queue-anim'
 import TweenOne from 'rc-tween-one'
 
-import logo from 'images/home/logo.png'
-import robber from 'images/home/robber.png'
-import phone from 'images/home/phone.png'
-import me from 'images/home/me.png'
-import desc from 'images/home/desc.png'
-import go from 'images/home/go.png'
+import logo from 'assets/home/logo.png'
+import robber from 'assets/home/robber.png'
+import phone from 'assets/home/phone.png'
+import me from 'assets/home/me.png'
+import desc from 'assets/home/desc.png'
+import go from 'assets/home/go.png'
 
 import Preload from 'components/Preload'
 import Stage from 'components/Stage'
@@ -95,7 +95,7 @@ class Comp extends React.Component {
         </QueueAnim>
         <QueueAnim key="desc" type="scale" delay={2000} duration={1000} component="span">
           <div key="desc" className={classes.desc}>
-            <input rows="5" placeholder="姓名" value={app.name} className={classes.input} onChange={this.handleChange} ref={el => this.input = el} />
+            <input rows="5" placeholder="输入你的姓名" value={app.name} className={classes.input} onChange={this.handleChange} ref={el => this.input = el} />
           </div>
         </QueueAnim>
         <QueueAnim key="phone" type="top" delay={2000} duration={1000} component="span">
