@@ -2,7 +2,7 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import 'typeface-roboto'
 
-import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles'
 import CssBaseline from 'material-ui/CssBaseline'
 import green from 'material-ui/colors/green'
 
@@ -27,7 +27,7 @@ class Comp extends React.Component {
     return (
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
-        <audio src={background} autoPlay="autoplay" loop="loop" />
+        <audio src={background} autoPlay="autoplay" loop="loop" ref={el => this.audio = el} />
         <Switch key='switch'>
           <Route path="/" component={Home} exact />
           <Route path="/scene1" component={Scene1} exact />
@@ -40,6 +40,11 @@ class Comp extends React.Component {
         </Switch>
       </MuiThemeProvider>
     )
+  }
+  componentDidMount() {
+    document.addEventListener("WeixinJSBridgeReady", () => {
+      this.audio.play()
+    }, false)
   }
 }
 
