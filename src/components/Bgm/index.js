@@ -29,7 +29,7 @@ class Comp extends React.Component {
       <React.Fragment>
         <audio src={bgm} autoPlay="autoplay" loop="loop" ref={el => this.audio = el} />
         <IconButton style={{
-          position: 'absolute',
+          position: 'fixed',
           top: 0,
           right: 0,
           zIndex: 999,
