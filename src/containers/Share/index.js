@@ -73,16 +73,16 @@ class Comp extends React.Component {
     const context = this.canvas.getContext("2d")
     context.drawImage(event.target, 0, 0)
 
-    context.font = '24px Arial'
+    context.font = '28px Helvetica,Arial'
     context.fillStyle = 'black'
     while(context.measureText(text).width > 120) {
       text = text.slice(0, text.length - 1)
     }
     context.fillText(text, 170 - context.measureText(text).width / 2, 1015)
 
-    context.font = '50px Arial'
+    context.font = '50px Helvetica,Arial'
     context.fillStyle = 'black'
-    context.fillText(text, (this.canvas.width - context.measureText(text).width) / 2, (score >= 11 && score <= 12) ? 550 : 600)
+    context.fillText(text, (this.canvas.width - context.measureText(text).width) / 2, (score >= 11) ? 550 : 600)
 
     this[ref].src = this.canvas.toDataURL("image/png")
   }
@@ -103,7 +103,7 @@ class Comp extends React.Component {
     const score = app.scores.reduce((a, b) => a + b, 0)
     let result = result4
     let photo = photo4
-    if(score >= 11 && score <= 12) {
+    if(score >= 11) {
       result = result1
       photo = photo1
     }

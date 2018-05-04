@@ -42,22 +42,26 @@ const styles = {
   },
   desc: {
     position: 'absolute',
-    width: 350,
+    maxWidth: 350,
+    width: '100%',
     left: 0,
     right: 0,
     margin: 'auto',
     background: `url(${desc})`,
     backgroundSize: '100% 100%',
-    padding: '170px 80px 25px',
+    padding: '150px 80px 20px',
     bottom: 100,
   },
   input: {
     width: '100%',
-    fontSize: 22,
+    fontSize: 20,
     background: 'none',
     border: 'none',
     zIndex: 99,
     textAlign: 'center',
+    '&::placeholder': {
+      fontSize: 18
+    }
   },
   go: {
     position: 'absolute',
@@ -70,6 +74,15 @@ const styles = {
 }
 
 class Comp extends React.Component {
+  placeholder = '输入你的姓名'
+  state = {
+    placeholder: this.placeholder
+  }
+  handleFocus = focus => event => {
+    this.setState({
+      placeholder: focus ? '' : this.placeholder
+    })
+  }
   handleChange = event => {
     const { dispatch } = this.props
     dispatch(App.update({
@@ -87,6 +100,7 @@ class Comp extends React.Component {
   }
   render() {
     const { classes, app } = this.props
+    const { placeholder } = this.state
 
     return (
       <Preload images={[ logo, me, robber, phone, desc, go ]} component={Stage}>
@@ -95,7 +109,7 @@ class Comp extends React.Component {
         </QueueAnim>
         <QueueAnim key="desc" type="scale" delay={2000} duration={1000} component="span">
           <div key="desc" className={classes.desc}>
-            <input rows="5" placeholder="输入你的姓名" value={app.name} className={classes.input} onChange={this.handleChange} ref={el => this.input = el} />
+            <input rows="5" placeholder={placeholder} value={app.name} className={classes.input} onFocus={this.handleFocus(true)} onBlur={this.handleFocus(false)} onChange={this.handleChange} ref={el => this.input = el} />
           </div>
         </QueueAnim>
         <QueueAnim key="phone" type="top" delay={2000} duration={1000} component="span">

@@ -116,13 +116,13 @@ class Comp extends React.Component {
           <TweenOne key="question" animation={{ scale: 0.9, yoyo: true, repeat: -1, type: 'from', duration: 1000 }} component="img" alt="question" src={question} className={classes.question} />
         </QueueAnim>
         <QueueAnim key="answer1" type="bottom" delay={7000} duration={1000} component="span">
-          <img key="answer1" alt="answer1" src={answer1} className={classes.answer1} onClick={this.handleClick(1)} />
+          <img key="answer1" alt="answer1" src={answer1} className={classes.answer1} onClick={this.handleClick(3)} />
         </QueueAnim>
         <QueueAnim key="answer2" type="bottom" delay={8000} duration={1000} component="span">
           <img key="answer2" alt="answer2" src={answer2} className={classes.answer2} onClick={this.handleClick(2)} />
         </QueueAnim>
         <QueueAnim key="answer3" type="bottom" delay={9000} duration={1000} component="span">
-          <img key="answer3" alt="answer3" src={answer3} className={classes.answer3} onClick={this.handleClick(3)} />
+          <img key="answer3" alt="answer3" src={answer3} className={classes.answer3} onClick={this.handleClick(1)} />
         </QueueAnim>
       </Preload>
     )
