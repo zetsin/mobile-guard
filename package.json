@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://zetsin.github.io/mobile-guard",
   "dependencies": {
+    "@material-ui/icons": "^1.0.0-beta.43",
     "gh-pages": "^1.1.0",
     "history": "^4.7.2",
     "material-ui": "next",

@@ -14,7 +14,7 @@ import Scene4 from 'containers/Scene4'
 import Share from 'containers/Share'
 import Ticket from 'containers/Ticket'
 
-import background from 'assets/background.mp3'
+import Bgm from 'components/Bgm'
 
 const theme = createMuiTheme({
   palette: {
@@ -27,7 +27,7 @@ class Comp extends React.Component {
     return (
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
-        <audio src={background} autoPlay="autoplay" loop="loop" ref={el => this.audio = el} />
+        <Bgm />
         <Switch key='switch'>
           <Route path="/" component={Home} exact />
           <Route path="/scene1" component={Scene1} exact />
@@ -40,11 +40,6 @@ class Comp extends React.Component {
         </Switch>
       </MuiThemeProvider>
     )
-  }
-  componentDidMount() {
-    document.addEventListener("WeixinJSBridgeReady", () => {
-      this.audio.play()
-    }, false)
   }
 }
 
