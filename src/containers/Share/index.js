@@ -78,7 +78,7 @@ class Comp extends React.Component {
     while(context.measureText(text).width > 120) {
       text = text.slice(0, text.length - 1)
     }
-    context.fillText(text, 170 - context.measureText(text).width / 2, 1015)
+    context.fillText(text, 165 - context.measureText(text).width / 2, 1015)
 
     context.font = '50px Helvetica,Arial'
     context.fillStyle = 'black'
