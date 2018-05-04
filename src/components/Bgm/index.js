@@ -45,6 +45,12 @@ class Comp extends React.Component {
   componentDidMount() {
     const { playing } = this.state
 
+    document.addEventListener("touchstart", () => {
+      if(playing) {
+        this.audio.play()
+      }
+    }, false)
+
     document.addEventListener("WeixinJSBridgeReady", () => {
       if(playing) {
         this.audio.play()
