@@ -1,6 +1,6 @@
 import React from 'react'
 import { Router, Switch, Route } from 'react-router'
-import createBrowserHistory from 'history/createBrowserHistory'
+import createHashHistory from 'history/createHashHistory'
 import createMemoryHistory from 'history/createMemoryHistory'
 
 import 'typeface-roboto'
@@ -19,7 +19,7 @@ import Ticket from 'containers/Ticket'
 
 import Bgm from 'components/Bgm'
 
-const theBrowserHistory = createBrowserHistory()
+const theHashHistory = createHashHistory()
 const theMemoryHistory = createMemoryHistory()
 
 const theme = createMuiTheme({
@@ -33,7 +33,7 @@ class Comp extends React.Component {
     return (
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
-        <Router history={theBrowserHistory}>
+        <Router history={theHashHistory}>
           <Switch>
             <Route path="/admin" component={Admin} exact />
             <Route render={() => (
