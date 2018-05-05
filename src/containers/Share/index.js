@@ -22,7 +22,7 @@ import button from 'assets/share/button.png'
 import left from 'assets/share/left.png'
 import right from 'assets/share/right.png'
 
-import { App } from 'stores'
+import { App, Api } from 'stores'
 
 const styles = {
   hidden: {
@@ -94,7 +94,7 @@ class Comp extends React.Component {
   }
   handleClick = event => {
     const { dispatch, history } = this.props
-    dispatch(App.share())
+    dispatch(Api.update())
     history.push('./ticket')
   }
   render() {

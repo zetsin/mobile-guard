@@ -25,21 +25,6 @@ export default {
         payload: app
       })
     },
-    share: function() {
-      const { getState } = this
-      const { app } = getState()
-
-      return fetch('http://couchdb.miaodeli.com/mobile-guard', {
-        method: 'post',
-　　　　　headers: {
-  　　　　 'Content-Type': 'application/json',
-　　　　 },
-        body: JSON.stringify({
-          ...app,
-          userAgent: window.navigator.userAgent
-        })
-      })
-    }
   },
 
   reducers: {

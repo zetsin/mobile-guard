@@ -1,31 +1,24 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware, combineReducers } from 'redux'
-import { Route } from 'react-router-dom'
-import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux'
-import createHistory from 'history/createMemoryHistory'
 import thunk from 'redux-thunk-it'
 
 import stores from 'stores'
 
-const history = createHistory()
-
 const store = createStore(
   combineReducers({
-    ...stores,
-    router: routerReducer
+    ...stores
   }),
-  applyMiddleware(thunk, routerMiddleware(history))
+  applyMiddleware(thunk)
 )
 
 class Comp extends React.Component {
   render () {
     const { component } = this.props
+    const Comp = component
     return (
       <Provider store={store}>
-        <ConnectedRouter history={history}>
-          <Route component={component} />
-        </ConnectedRouter>
+        <Comp />
       </Provider>
     )
   }
