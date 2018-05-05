@@ -1,7 +1,6 @@
 import React from 'react'
-import { Router, Switch, Route } from 'react-router'
-import createHashHistory from 'history/createHashHistory'
-import createMemoryHistory from 'history/createMemoryHistory'
+import { Switch, Route } from 'react-router'
+import { HashRouter, MemoryRouter, BrowserRouter } from 'react-router-dom'
 
 import 'typeface-roboto'
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles'
@@ -19,9 +18,6 @@ import Ticket from 'containers/Ticket'
 
 import Bgm from 'components/Bgm'
 
-const theHashHistory = createHashHistory()
-const theMemoryHistory = createMemoryHistory()
-
 const theme = createMuiTheme({
   palette: {
     primary: green
@@ -30,16 +26,18 @@ const theme = createMuiTheme({
 
 class Comp extends React.Component {
   render() {
+    const RootRouter = window.location.href.indexOf('#') >= 0 ? HashRouter : BrowserRouter
+
     return (
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
-        <Router history={theHashHistory}>
+        <RootRouter>
           <Switch>
             <Route path="/admin" component={Admin} exact />
             <Route render={() => (
               <React.Fragment>
                 <Bgm />
-                <Router history={theMemoryHistory}>
+                <MemoryRouter>
                   <Switch>
                     <Route path="/" component={Home} exact />
                     <Route path="/scene1" component={Scene1} exact />
@@ -50,11 +48,11 @@ class Comp extends React.Component {
                     <Route path="/ticket" component={Ticket} exact />
                     <Route component={Home} />
                   </Switch>
-                </Router>
+                </MemoryRouter>
               </React.Fragment>
             )} />
           </Switch>
-        </Router>
+        </RootRouter>
       </MuiThemeProvider>
     )
   }
