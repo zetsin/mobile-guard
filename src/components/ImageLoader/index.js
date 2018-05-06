@@ -22,14 +22,14 @@ class Comp extends React.Component {
       <React.Fragment>
         <LinearProgress />
         <div style={{ display: 'none' }}>
-          {_loads.map((item, index) => <img key={index} alt="preload" src={item} onLoad={this.handleLoad} />)}
+          {_loads.map((item, index) => <img key={index} alt="loads" src={item} onLoad={this.handleLoad} />)}
         </div>
       </React.Fragment>
     ): (
       <Component {...(component ? this.props : {})}>
         { children }
         <div style={{ display: 'none' }}>
-          {_preloads.map((item, index) => <img key={index} alt="preload" src={item} />)}
+          {_preloads.map((item, index) => <img key={index} alt="preloads" src={item} />)}
         </div>
       </Component>
     )
