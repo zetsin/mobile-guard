@@ -103,10 +103,9 @@ function asyncComponent(load, preLoad) {
         })
       }
     }
+    
     render() {
       const { Component, PreloadComponent } = this.state
-
-      console.log(this.state)
 
       return (
         <React.Fragment>
