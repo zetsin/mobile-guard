@@ -15,12 +15,12 @@ import Bgm from 'components/Bgm'
 import { App } from 'stores'
 
 const Admin = asyncComponent(() => import('containers/Admin'))
-const Home = asyncComponent(() => import('containers/Home'))
-const Scene1 = asyncComponent(() => import('containers/Scene1'))
-const Scene2 = asyncComponent(() => import('containers/Scene2'))
-const Scene3 = asyncComponent(() => import('containers/Scene3'))
-const Scene4 = asyncComponent(() => import('containers/Scene4'))
-const Share = asyncComponent(() => import('containers/Share'))
+const Home = asyncComponent(() => import('containers/Home'), () => import('containers/Scene1'))
+const Scene1 = asyncComponent(() => import('containers/Scene1'), () => import('containers/Scene2'))
+const Scene2 = asyncComponent(() => import('containers/Scene2'), () => import('containers/Scene3'))
+const Scene3 = asyncComponent(() => import('containers/Scene3'), () => import('containers/Scene4'))
+const Scene4 = asyncComponent(() => import('containers/Scene4'), () => import('containers/Share'))
+const Share = asyncComponent(() => import('containers/Share'), () => import('containers/Ticket'))
 const Ticket = asyncComponent(() => import('containers/Ticket'))
 
 const theme = createMuiTheme({
@@ -82,21 +82,42 @@ class Comp extends React.Component {
   }
 }
 
-function asyncComponent(getComponent) {
+function asyncComponent(load, preLoad) {
   return class AsyncComponent extends React.Component {
-    state = { Component: null }
+    state = {
+      Component: null,
+      PreloadComponent: null,
+    }
 
     componentWillMount() {
-      if (!this.state.Component) {
-        getComponent().then(({default: Component}) => {
+      if (load && !this.state.Component) {
+        load()
+        .then(({default: Component}) => {
           this.setState({ Component })
+        })
+      }
+      if (preLoad && !this.state.PreloadComponent) {
+        preLoad()
+        .then(({default: PreloadComponent}) => {
+          this.setState({ PreloadComponent })
         })
       }
     }
     render() {
-      const { Component } = this.state
+      const { Component, PreloadComponent } = this.state
 
-      return Component ? <Component {...this.props} /> : null
+      console.log(this.state)
+
+      return (
+        <React.Fragment>
+          {Component ? <Component {...this.props} /> : null}
+          {PreloadComponent ? (
+            <div style={{ display: 'none' }}>
+              <PreloadComponent {...this.props} />
+            </div>
+          ) : null}
+        </React.Fragment>
+      )
     }
   }
 }

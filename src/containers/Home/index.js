@@ -97,7 +97,7 @@ class Comp extends React.Component {
     const { placeholder } = this.state
 
     return (
-      <ImageLoader loads={media.home} preloads={media.scene1} component={Stage}>
+      <ImageLoader images={media.home} component={Stage}>
         <QueueAnim key="robber" type="left" delay={1000} duration={1000} component="span">
           <img key="robber" alt="robber" src={media.home.robber} className={classes.robber} />
         </QueueAnim>

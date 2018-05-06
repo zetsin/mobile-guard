@@ -95,7 +95,7 @@ class Comp extends React.Component {
     const { classes } = this.props
 
     return (
-      <ImageLoader loads={media.scene2} preloads={media.scene3} component={Stage}>
+      <ImageLoader images={media.scene2} component={Stage}>
         <QueueAnim key="corner" type="scaleBig" delay={0} duration={1000} component="span">
           <img key="corner" alt="corner" src={media.scene2.corner} className={classes.corner} />
         </QueueAnim>
