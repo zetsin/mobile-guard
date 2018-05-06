@@ -89,7 +89,7 @@ class Comp extends React.Component {
       }))
     }
     else {
-      dispatch(Api.update())
+      dispatch(Api.create())
       history.push('./ticket')
     }
   }

@@ -16,7 +16,7 @@ export default {
         })
       })
     },
-    update: function() {
+    create: function() {
       const { getState } = this
       const { app } = getState()
 
