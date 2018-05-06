@@ -11,20 +11,26 @@ class Comp extends React.Component {
     })
   }
   render() {
-    const { children, component, images=[] } = this.props
+    const { children, component, loads=[], preloads=[] } = this.props
+
+    const _loads = loads.length === undefined ? Object.values(loads) : loads
+    const _preloads = preloads.length === undefined ? Object.values(preloads) : preloads
 
     const Component = component || React.Fragment
 
-    return this.state.loaded < images.length ? (
+    return this.state.loaded < _loads.length ? (
       <React.Fragment>
         <LinearProgress />
         <div style={{ display: 'none' }}>
-          {images.map((item, index) => <img key={index} alt="preload" src={item} onLoad={this.handleLoad} />)}
+          {_loads.map((item, index) => <img key={index} alt="preload" src={item} onLoad={this.handleLoad} />)}
         </div>
       </React.Fragment>
     ): (
       <Component {...(component ? this.props : {})}>
         { children }
+        <div style={{ display: 'none' }}>
+          {_preloads.map((item, index) => <img key={index} alt="preload" src={item} />)}
+        </div>
       </Component>
     )
   }

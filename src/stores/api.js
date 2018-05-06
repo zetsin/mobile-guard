@@ -26,7 +26,9 @@ export default {
   　　　　 'Content-Type': 'application/json',
 　　　　 },
         body: JSON.stringify({
-          ...app,
+          name: app.name,
+          scores: app.scores,
+          story: app.story,
           userAgent: window.navigator.userAgent
         })
       })

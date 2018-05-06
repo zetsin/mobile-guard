@@ -1,11 +1,14 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Switch, Route } from 'react-router'
 import { HashRouter, MemoryRouter, BrowserRouter } from 'react-router-dom'
 
 import 'typeface-roboto'
+import { withStyles } from 'material-ui/styles'
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles'
 import CssBaseline from 'material-ui/CssBaseline'
 import green from 'material-ui/colors/green'
+import Snackbar from 'material-ui/Snackbar'
 
 import Admin from 'containers/Admin'
 import Home from 'containers/Home'
@@ -18,26 +21,47 @@ import Ticket from 'containers/Ticket'
 
 import Bgm from 'components/Bgm'
 
+import { App } from 'stores'
+
 const theme = createMuiTheme({
   palette: {
     primary: green
   },
 })
 
+const styles = {
+  message: {
+    margin: 'auto'
+  }
+}
+
 class Comp extends React.Component {
+  handleClose = event => {
+    const { dispatch } = this.props
+    dispatch(App.update({
+      message: ''
+    }))
+  }
   render() {
+    const { classes, app } = this.props
     const RootRouter = window.location.href.indexOf('#') >= 0 ? HashRouter : BrowserRouter
 
     return (
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
+        <Snackbar
+          SnackbarContentProps={{classes}}
+          open={!!app.message}
+          onClose={this.handleClose}
+          message={app.message}
+        />
         <RootRouter>
           <Switch>
             <Route path="/admin" component={Admin} exact />
             <Route render={() => (
               <React.Fragment>
                 <Bgm />
-                <MemoryRouter>
+                <HashRouter>
                   <Switch>
                     <Route path="/" component={Home} exact />
                     <Route path="/scene1" component={Scene1} exact />
@@ -48,7 +72,7 @@ class Comp extends React.Component {
                     <Route path="/ticket" component={Ticket} exact />
                     <Route component={Home} />
                   </Switch>
-                </MemoryRouter>
+                </HashRouter>
               </React.Fragment>
             )} />
           </Switch>
@@ -58,4 +82,4 @@ class Comp extends React.Component {
   }
 }
 
-export default Comp
+export default withStyles(styles)(connect(state => state)(Comp))

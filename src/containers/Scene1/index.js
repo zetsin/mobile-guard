@@ -6,17 +6,8 @@ import { withStyles } from 'material-ui/styles'
 import QueueAnim from 'rc-queue-anim'
 import TweenOne from 'rc-tween-one'
 
-import win from 'assets/scene1/win.png'
-import me from 'assets/scene1/me.png'
-import shadow from 'assets/scene1/shadow.png'
-import modal from 'assets/modal.png'
-import desc from 'assets/scene1/desc.png'
-import question from 'assets/question.png'
-import answer1 from 'assets/scene1/answer1.png'
-import answer2 from 'assets/scene1/answer2.png'
-import answer3 from 'assets/scene1/answer3.png'
-
-import Preload from 'components/Preload'
+import media from 'media'
+import ImageLoader from 'components/ImageLoader'
 import Stage from 'components/Stage'
 
 import { App } from 'stores'
@@ -79,35 +70,35 @@ class Comp extends React.Component {
     const { classes } = this.props
 
     return (
-      <Preload images={[ win, me, shadow, modal, desc, question, answer1, answer2, answer3 ]} component={Stage}>
+      <ImageLoader loads={[media.modal, media.question]} preloads={media.scene2} component={Stage}>
         <QueueAnim key="win" type="scale" delay={0} duration={1000} component="span">
-          <img key="win" alt="win" src={win} className={classes.win} />
+          <img key="win" alt="win" src={media.scene1.win} className={classes.win} />
         </QueueAnim>
         <QueueAnim key="me" type="scaleBig" delay={0} duration={1000} component="span">
-          <img key="me" alt="me" src={me} className={classes.me} />
+          <img key="me" alt="me" src={media.scene1.me} className={classes.me} />
         </QueueAnim>
         <QueueAnim key="shadow" type="bottom" delay={1000} duration={1000} component="span">
-          <TweenOne key="shadow" animation={{ scale: 1.1, opacity: 0.8, blur: '10px', yoyo: true, repeat: -1, type: 'from', duration: 1555 }} component="img" alt="shadow" src={shadow} className={classes.shadow} />
+          <TweenOne key="shadow" animation={{ scale: 1.1, opacity: 0.8, blur: '10px', yoyo: true, repeat: -1, type: 'from', duration: 1555 }} component="img" alt="shadow" src={media.scene1.shadow} className={classes.shadow} />
         </QueueAnim>
         <QueueAnim key="modal" type="alpha" delay={2000} duration={1000} component="span">
-          <img key="modal" alt="modal" src={modal} className={classes.modal} />
+          <img key="modal" alt="modal" src={media.modal} className={classes.modal} />
         </QueueAnim>
         <QueueAnim key="desc" type="top" delay={2000} duration={2000} component="span">
-          <img key="desc" alt="desc" src={desc} className={classes.desc} />
+          <img key="desc" alt="desc" src={media.scene1.desc} className={classes.desc} />
         </QueueAnim>
         <QueueAnim key="question" type="scaleBig" delay={4000} duration={1000} component="span">
-          <TweenOne key="question" animation={{ scale: 0.9, yoyo: true, repeat: -1, type: 'from', duration: 1000 }} component="img" alt="question" src={question} className={classes.question} />
+          <TweenOne key="question" animation={{ scale: 0.9, yoyo: true, repeat: -1, type: 'from', duration: 1000 }} component="img" alt="question" src={media.question} className={classes.question} />
         </QueueAnim>
         <QueueAnim key="answer1" type="bottom" delay={5000} duration={1000} component="span">
-          <img key="answer1" alt="answer1" src={answer1} className={classes.answer1} onClick={this.handleClick(1)} />
+          <img key="answer1" alt="answer1" src={media.scene1.answer1} className={classes.answer1} onClick={this.handleClick(1)} />
         </QueueAnim>
         <QueueAnim key="answer2" type="bottom" delay={6000} duration={1000} component="span">
-          <img key="answer2" alt="answer2" src={answer2} className={classes.answer2} onClick={this.handleClick(3)} />
+          <img key="answer2" alt="answer2" src={media.scene1.answer2} className={classes.answer2} onClick={this.handleClick(3)} />
         </QueueAnim>
         <QueueAnim key="answer3" type="bottom" delay={7000} duration={1000} component="span">
-          <img key="answer3" alt="answer3" src={answer3} className={classes.answer3} onClick={this.handleClick(2)} />
+          <img key="answer3" alt="answer3" src={media.scene1.answer3} className={classes.answer3} onClick={this.handleClick(2)} />
         </QueueAnim>
-      </Preload>
+      </ImageLoader>
     )
   }
 }

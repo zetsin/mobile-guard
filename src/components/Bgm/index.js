@@ -4,7 +4,7 @@ import IconButton from 'material-ui/IconButton'
 import VolumeOff from '@material-ui/icons/VolumeOff'
 import VolumeUp from '@material-ui/icons/VolumeUp'
 
-import bgm from 'assets/bgm.mp3'
+import bgm from 'media/bgm.mp3'
 
 class Comp extends React.Component {
   state = {

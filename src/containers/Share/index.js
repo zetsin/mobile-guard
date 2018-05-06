@@ -6,21 +6,9 @@ import Grid from 'material-ui/Grid'
 
 import TweenOne from 'rc-tween-one'
 
-import Preload from 'components/Preload'
+import media from 'media'
+import ImageLoader from 'components/ImageLoader'
 import Stage from 'components/Stage'
-
-import result1 from 'assets/share/result1.png'
-import result2 from 'assets/share/result2.png'
-import result3 from 'assets/share/result3.png'
-import result4 from 'assets/share/result4.png'
-import photo1 from 'assets/share/photo1.png'
-import photo2 from 'assets/share/photo2.png'
-import photo3 from 'assets/share/photo3.png'
-import photo4 from 'assets/share/photo4.png'
-import story from 'assets/share/story.png'
-import button from 'assets/share/button.png'
-import left from 'assets/share/left.png'
-import right from 'assets/share/right.png'
 
 import { App, Api } from 'stores'
 
@@ -40,7 +28,7 @@ const styles = {
   },
   story: {
     width: '100%',
-    background: `url(${story})`,
+    background: `url(${media.share.story})`,
     backgroundSize: '100% 100%',
     padding: '3% 12%'
   },
@@ -93,31 +81,39 @@ class Comp extends React.Component {
     }))
   }
   handleClick = event => {
-    const { dispatch, history } = this.props
-    dispatch(Api.update())
-    history.push('./ticket')
+    const { dispatch, history, app } = this.props
+
+    if(app.story.length < 10) {
+      dispatch(App.update({
+        message: '故事字数不少于10'
+      }))
+    }
+    else {
+      dispatch(Api.update())
+      history.push('./ticket')
+    }
   }
   render() {
     const { classes, app } = this.props
 
     const score = app.scores.reduce((a, b) => a + b, 0)
-    let result = result4
-    let photo = photo4
+    let result = media.share.result4
+    let photo = media.share.photo4
     if(score >= 11) {
-      result = result1
-      photo = photo1
+      result = media.share.result1
+      photo = media.share.photo1
     }
     else if(score >= 9 && score <= 10) {
-      result = result2
-      photo = photo2
+      result = media.share.result2
+      photo = media.share.photo2
     }
     else if(score >= 7 && score <= 8) {
-      result = result3
-      photo = photo3
+      result = media.share.result3
+      photo = media.share.photo3
     }
 
     return (
-      <Preload images={[story, left, button, right, result, photo]} component={Stage} style={{ height: 'initial' }}>
+      <ImageLoader preloads={media.ticket} component={Stage} style={{ height: 'initial' }}>
         <Grid container>
           <Grid item xs={12}>
             <div style={{
@@ -138,18 +134,18 @@ class Comp extends React.Component {
           <Grid item xs={12}>
             <Grid container>
               <Grid item xs={3}>
-                <TweenOne animation={{ x: '-10%', yoyo: true, repeat: -1, type: 'from', duration: 1000 }} component="img" alt="left" src={left} className={classes.left} />
+                <TweenOne animation={{ x: '-10%', yoyo: true, repeat: -1, type: 'from', duration: 1000 }} component="img" alt="left" src={media.share.left} className={classes.left} />
               </Grid>
               <Grid item xs={6}>
-                <TweenOne animation={{ scale: 0.9, yoyo: true, repeat: -1, type: 'from', duration: 1000 }} component="img" alt="button" src={button} className={classes.button} onClick={this.handleClick} />
+                <TweenOne animation={{ scale: 0.9, yoyo: true, repeat: -1, type: 'from', duration: 1000 }} component="img" alt="button" src={media.share.button} className={classes.button} onClick={this.handleClick} />
               </Grid>
               <Grid item xs={3}>
-                <TweenOne animation={{ x: '10%', yoyo: true, repeat: -1, type: 'from', duration: 1000 }} component="img" alt="right" src={right} className={classes.right} />
+                <TweenOne animation={{ x: '10%', yoyo: true, repeat: -1, type: 'from', duration: 1000 }} component="img" alt="right" src={media.share.right} className={classes.right} />
               </Grid>
             </Grid>
           </Grid>
         </Grid>
-      </Preload>
+      </ImageLoader>
     )
   }
 }

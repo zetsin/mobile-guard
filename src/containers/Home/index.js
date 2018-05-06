@@ -6,14 +6,8 @@ import { withStyles } from 'material-ui/styles'
 import QueueAnim from 'rc-queue-anim'
 import TweenOne from 'rc-tween-one'
 
-import logo from 'assets/home/logo.png'
-import robber from 'assets/home/robber.png'
-import phone from 'assets/home/phone.png'
-import me from 'assets/home/me.png'
-import desc from 'assets/home/desc.png'
-import go from 'assets/home/go.png'
-
-import Preload from 'components/Preload'
+import media from 'media'
+import ImageLoader from 'components/ImageLoader'
 import Stage from 'components/Stage'
 
 import { App } from 'stores'
@@ -47,7 +41,7 @@ const styles = {
     left: 0,
     right: 0,
     margin: 'auto',
-    background: `url(${desc})`,
+    background: `url(${media.home.desc})`,
     backgroundSize: '100% 100%',
     padding: '150px 80px 20px',
     bottom: 100,
@@ -103,9 +97,9 @@ class Comp extends React.Component {
     const { placeholder } = this.state
 
     return (
-      <Preload images={[ logo, me, robber, phone, desc, go ]} component={Stage}>
+      <ImageLoader loads={media.home} preloads={media.scene1} component={Stage}>
         <QueueAnim key="robber" type="left" delay={1000} duration={1000} component="span">
-          <img key="robber" alt="robber" src={robber} className={classes.robber} />
+          <img key="robber" alt="robber" src={media.home.robber} className={classes.robber} />
         </QueueAnim>
         <QueueAnim key="desc" type="scale" delay={2000} duration={1000} component="span">
           <div key="desc" className={classes.desc}>
@@ -113,18 +107,18 @@ class Comp extends React.Component {
           </div>
         </QueueAnim>
         <QueueAnim key="phone" type="top" delay={2000} duration={1000} component="span">
-          <TweenOne key="phone" animation={{ y: "-10%", yoyo: true, repeat: -1, type: 'from', duration: 1555 }} component="img" alt="phone" src={phone} className={classes.phone} />
+          <TweenOne key="phone" animation={{ y: "-10%", yoyo: true, repeat: -1, type: 'from', duration: 1555 }} component="img" alt="phone" src={media.home.phone} className={classes.phone} />
         </QueueAnim>
         <QueueAnim key="me" type="right" delay={1000} duration={1000} component="span">
-          <img key="me" alt="me" src={me} className={classes.me} />
+          <img key="me" alt="me" src={media.home.me} className={classes.me} />
         </QueueAnim>
         <QueueAnim key="go" type="bottom" delay={3000} duration={1000} component="span">
-          <TweenOne key="go" animation={{ scale: 1.1, yoyo: true, repeat: -1, type: 'from', duration: 955 }} component="img" alt="go" src={go} className={classes.go} onClick={this.handleClick} />
+          <TweenOne key="go" animation={{ scale: 1.1, yoyo: true, repeat: -1, type: 'from', duration: 955 }} component="img" alt="go" src={media.home.go} className={classes.go} onClick={this.handleClick} />
         </QueueAnim>
         <QueueAnim key="logo" type="scaleBig" delay={0} duration={1000} component="span">
-          <TweenOne key="logo" animation={{ scale: 1.1, yoyo: true, repeat: -1, type: 'from', duration: 1000 }} component="img" alt="logo" src={logo} className={classes.logo} />
+          <TweenOne key="logo" animation={{ scale: 1.1, yoyo: true, repeat: -1, type: 'from', duration: 1000 }} component="img" alt="logo" src={media.home.logo} className={classes.logo} />
         </QueueAnim>
-      </Preload>
+      </ImageLoader>
     )
   }
 }

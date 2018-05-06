@@ -2,7 +2,8 @@ export default {
   state: {
     name: '',
     scores: [],
-    story: ''
+    story: '',
+    message: ''
   },
 
   actions: {

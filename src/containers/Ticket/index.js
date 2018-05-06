@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 
 import { withStyles } from 'material-ui/styles'
 
-import Preload from 'components/Preload'
+import ImageLoader from 'components/ImageLoader'
 
-import ticket from 'assets/ticket/main.png'
+import media from 'media'
 import Stage from 'components/Stage'
 
 const styles = {
@@ -19,9 +19,9 @@ class Comp extends React.Component {
     const { classes } = this.props
 
     return (
-      <Preload images={[ticket]} component={Stage} style={{ height: 'initial' }}>
-        <img key="ticket" alt="ticket" src={ticket} className={classes.ticket} />
-      </Preload>
+      <ImageLoader component={Stage} style={{ height: 'initial' }}>
+        <img key="ticket" alt="ticket" src={media.ticket.main} className={classes.ticket} />
+      </ImageLoader>
     )
   }
 }
