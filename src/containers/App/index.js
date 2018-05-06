@@ -10,18 +10,18 @@ import CssBaseline from 'material-ui/CssBaseline'
 import green from 'material-ui/colors/green'
 import Snackbar from 'material-ui/Snackbar'
 
-import Admin from 'containers/Admin'
-import Home from 'containers/Home'
-import Scene1 from 'containers/Scene1'
-import Scene2 from 'containers/Scene2'
-import Scene3 from 'containers/Scene3'
-import Scene4 from 'containers/Scene4'
-import Share from 'containers/Share'
-import Ticket from 'containers/Ticket'
-
 import Bgm from 'components/Bgm'
 
 import { App } from 'stores'
+
+const Admin = asyncComponent(() => import('containers/Admin'))
+const Home = asyncComponent(() => import('containers/Home'))
+const Scene1 = asyncComponent(() => import('containers/Scene1'))
+const Scene2 = asyncComponent(() => import('containers/Scene2'))
+const Scene3 = asyncComponent(() => import('containers/Scene3'))
+const Scene4 = asyncComponent(() => import('containers/Scene4'))
+const Share = asyncComponent(() => import('containers/Share'))
+const Ticket = asyncComponent(() => import('containers/Ticket'))
 
 const theme = createMuiTheme({
   palette: {
@@ -79,6 +79,25 @@ class Comp extends React.Component {
         </RootRouter>
       </MuiThemeProvider>
     )
+  }
+}
+
+function asyncComponent(getComponent) {
+  return class AsyncComponent extends React.Component {
+    state = { Component: null }
+
+    componentWillMount() {
+      if (!this.state.Component) {
+        getComponent().then(({default: Component}) => {
+          this.setState({ Component })
+        })
+      }
+    }
+    render() {
+      const { Component } = this.state
+
+      return Component ? <Component {...this.props} /> : null
+    }
   }
 }
 
