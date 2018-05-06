@@ -17,5 +17,5 @@ context.keys().forEach(function (key) {
     }
   }
 })
-console.log(object)
+
 export default object

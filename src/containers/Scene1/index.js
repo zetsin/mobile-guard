@@ -70,7 +70,7 @@ class Comp extends React.Component {
     const { classes } = this.props
 
     return (
-      <ImageLoader loads={[media.modal, media.question]} preloads={media.scene2} component={Stage}>
+      <ImageLoader loads={[media.modal, media.question, ...Object.values(media.scene1)]} preloads={media.scene2} component={Stage}>
         <QueueAnim key="win" type="scale" delay={0} duration={1000} component="span">
           <img key="win" alt="win" src={media.scene1.win} className={classes.win} />
         </QueueAnim>

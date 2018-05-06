@@ -61,7 +61,7 @@ class Comp extends React.Component {
             <Route render={() => (
               <React.Fragment>
                 <Bgm />
-                <HashRouter>
+                <MemoryRouter>
                   <Switch>
                     <Route path="/" component={Home} exact />
                     <Route path="/scene1" component={Scene1} exact />
@@ -72,7 +72,7 @@ class Comp extends React.Component {
                     <Route path="/ticket" component={Ticket} exact />
                     <Route component={Home} />
                   </Switch>
-                </HashRouter>
+                </MemoryRouter>
               </React.Fragment>
             )} />
           </Switch>

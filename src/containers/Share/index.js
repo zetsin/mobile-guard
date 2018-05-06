@@ -113,7 +113,7 @@ class Comp extends React.Component {
     }
 
     return (
-      <ImageLoader preloads={media.ticket} component={Stage} style={{ height: 'initial' }}>
+      <ImageLoader loads={media.share} preloads={media.ticket} component={Stage} style={{ height: 'initial' }}>
         <Grid container>
           <Grid item xs={12}>
             <div style={{

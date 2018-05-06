@@ -19,7 +19,7 @@ class Comp extends React.Component {
     const { classes } = this.props
 
     return (
-      <ImageLoader component={Stage} style={{ height: 'initial' }}>
+      <ImageLoader loads={media.ticket} component={Stage} style={{ height: 'initial' }}>
         <img key="ticket" alt="ticket" src={media.ticket.main} className={classes.ticket} />
       </ImageLoader>
     )
